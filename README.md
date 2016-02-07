@@ -29,7 +29,7 @@ If you're on Arch:
 # pacman -S base-devel avr-gcc avr-binutils avr-libc avrdude
 ```
 
-If you're on Mac, you should be able to pull the software with *brew*.
+If you're on Mac, you should be able to pull the stuff with *brew*.
 
 ## Getting started
 
