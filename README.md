@@ -1,4 +1,4 @@
-# AVR C Builerplate
+# AVR C Boilerplate
 
 This is a basic boilerplate for programming AVRs in C.
 
