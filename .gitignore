@@ -39,3 +39,7 @@
 *.list
 *.eeprom
 *.pre
+
+# QtCreator user-specific
+*.pro.user
+

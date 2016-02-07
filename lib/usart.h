@@ -14,6 +14,8 @@
 #include <stdbool.h>
 #include <stdint.h>
 
+#include "calc.h"
+
 
 /* USART BAUD RATE REGISTER values at 16 MHz */
 enum {
@@ -40,61 +42,43 @@ void usart_init(uint16_t ubrr);
 #define usart_tx_ready() (0 != (UCSR0A & (1 << UDRE0)))
 
 
-
-
 // ---- Enable UART interrupts ------------
 
 /** Enable or disable RX ISR */
-inline void usart_rx_isr_enable(bool yes)
-{
-	set_bit(UCSR0B, RXCIE0, yes);
-}
+#define usart_rx_isr_enable(yes) set_bit(UCSR0B, RXCIE0, (yes))
+
 
 /** Enable or disable TX ISR (1 byte is sent) */
-inline void usart_tx_isr_enable(bool yes)
-{
-	set_bit(UCSR0B, TXCIE0, yes);
-}
+#define usart_tx_isr_enable(yes) set_bit(UCSR0B, TXCIE0, (yes))
+
 
 /** Enable or disable DRE ISR (all is sent) */
-inline void usart_dre_isr_enable(bool yes)
-{
-	set_bit(UCSR0B, UDRIE0, yes);
-}
+#define usart_dre_isr_enable(yes) set_bit(UCSR0B, UDRIE0, (yes))
 
 
 // ---- Basic IO --------------------------
 
 /** Send byte over USART */
-inline void usart_tx(uint8_t data)
-{
-	// Wait for transmit buffer
-	while (!usart_tx_ready());
-	// send it
-	UDR0 = data;
-}
+void usart_tx(uint8_t data);
 
 
 /** Receive one byte over USART */
-inline uint8_t usart_rx(void)
-{
-	// Wait for data to be received
-	while (!usart_rx_ready());
-	// Get and return received data from buffer
-	return UDR0;
-}
+uint8_t usart_rx(void);
+
 
 /** Send byte over UART */
 #define usart_putc(data) usart_tx((data))
 
+
 /** Clear receive buffer */
-void usart_clear_rx();
+void usart_clear_rx(void);
 
 
 // ---- Strings ---------------------------
 
 /** Send string over UART */
 void usart_puts(const char* str);
+
 
 /** Send progmem string over UART */
 void usart_puts_P(const char* str);

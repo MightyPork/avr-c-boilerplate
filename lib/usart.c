@@ -24,6 +24,26 @@ void usart_init(uint16_t ubrr)
 }
 
 
+/** Send byte over USART */
+void usart_tx(uint8_t data)
+{
+	// Wait for transmit buffer
+	while (!usart_tx_ready());
+	// send it
+	UDR0 = data;
+}
+
+
+/** Receive one byte over USART */
+uint8_t usart_rx(void)
+{
+	// Wait for data to be received
+	while (!usart_rx_ready());
+	// Get and return received data from buffer
+	return UDR0;
+}
+
+
 /** Send string over USART */
 void usart_puts(const char* str)
 {
