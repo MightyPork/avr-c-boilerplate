@@ -37,10 +37,10 @@ The provided main.c is a good starting point - it contains some simple demo code
 
 You can compile it with `make` and flash with `make flash`.
 
-If you add a new C file to the project, add an entry for it's `.o` (object file,
+If you *add a new C file* to the project, add an entry for it's `.o` (object file,
 created by the compiler before linking) to the `OBJS` list in the Makefile.
 
-Similarly, if you add a new folder with header files, add it to `INCL_DIRS`.
+Similarly, if you *add a new folder with header files*, add it to `INCL_DIRS`.
 
-The Makefile should take care of everything for you, this is the only modification
-you should have to do.
+In case you need `printf` (or `printf` with floats), enable the appropriate LD_FLAGS in the Makefile (it's well
+commented). Code size will - obviously - grow quite a bit.
