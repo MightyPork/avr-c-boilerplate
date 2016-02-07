@@ -14,6 +14,22 @@
 #include <stdbool.h>
 #include <stdint.h>
 
+
+/* USART BAUD RATE REGISTER values at 16 MHz */
+enum {
+	BAUD_9600 = 103,
+	BAUD_14400 = 68,
+	BAUD_19200 = 51,
+	BAUD_28800 = 34,
+	BAUD_38400 = 25,
+	BAUD_57600 = 16,
+	BAUD_76800 = 12,
+	BAUD_115200 = 8,
+	BAUD_250k = 3,
+	BAUD_500k = 1,
+	BAUD_1M = 0,
+};
+
 /** Init UART with a UBRR value */
 void usart_init(uint16_t ubrr);
 
