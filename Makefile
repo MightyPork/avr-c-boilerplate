@@ -11,9 +11,13 @@ LFUSE = 0xFF
 HFUSE = 0xDE
 EFUSE = 0x05
 
-# Avrdude settings
+# AVRDUDE settings
+PROG_BAUD = 57600
+PROG_DEV  = /dev/ttyUSB0
 PROG_TYPE = arduino
-PROG_ARGS = -b 57600 -P /dev/ttyUSB0
+
+# Build the final AVRDUDE arguments
+PROG_ARGS = -c $(PROG_TYPE) -p $(MCU) -b $(PROG_BAUD) -P $(PROG_DEV)
 
 #############################################
 
@@ -112,23 +116,22 @@ clean:
 ## === avrdude ===
 
 flash: $(BINARY).hex
-	$(AVRDUDE) -c $(PROG_TYPE) -p $(MCU) $(PROG_ARGS) -U flash:w:$<
+	$(AVRDUDE) $(PROG_ARGS) -U flash:w:$<
 
 flashe: $(BINARY).eeprom
-	$(AVRDUDE) -c $(PROG_TYPE) -p $(MCU) $(PROG_ARGS) -U eeprom:w:$<
+	$(AVRDUDE) $(PROG_ARGS) -U eeprom:w:$<
 
 shell:
-	$(AVRDUDE) -c $(PROG_TYPE) -p $(MCU) $(PROG_ARGS) -nt
+	$(AVRDUDE) $(PROG_ARGS) -nt
 
 # === fuses ===
+
+# this may not work with the arduino programmer, I haven't tried.
 
 FUSE_STRING = -U lfuse:w:$(LFUSE):m -U hfuse:w:$(HFUSE):m -U efuse:w:$(EFUSE):m
 
 fuses:
-	$(AVRDUDE) -c $(PROG_TYPE) -p $(MCU) $(PROG_ARGS) $(FUSE_STRING)
+	$(AVRDUDE) $(PROG_ARGS) $(FUSE_STRING)
 
 show_fuses:
-	$(AVRDUDE) -c $(PROG_TYPE) -p $(MCU) $(PROG_ARGS) -nv
-
-set_default_fuses:  FUSE_STRING = -U lfuse:w:$(LFUSE):m -U hfuse:w:$(HFUSE):m -U efuse:w:$(EFUSE):m
-set_default_fuses:  fuses
+	$(AVRDUDE) $(PROG_ARGS) -nv

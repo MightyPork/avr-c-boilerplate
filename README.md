@@ -37,16 +37,30 @@ The provided `main.c` is a good starting point - it contains some simple demo co
 
 You can compile it with `make` and flash with `make flash`.
 
-### "It doesn't work"
+### Before you can flash
 
-**Before you can flash,** check that the `avrdude` options in the file are correct for your system - especially 
-the device (`/dev/ttyUSB0`). It can differ if you're on Mac or Windows (`/dev/cu.xxx`, resp. `COMx`).
+First, check that the `avrdude` options in the file are correct for your system - especially 
+the device and speed.
 
-You may also adjust the baudrate (`-b 57600`). Some boards need 115200 or a different value.
+```ini
+# AVRDUDE settings
+PROG_BAUD = 57600
+PROG_DEV  = /dev/ttyUSB0
+PROG_TYPE = arduino
 
-You can look what the Arduino IDE is using - it's running avrdude too.
+# Build the final AVRDUDE arguments
+PROG_ARGS = -c $(PROG_TYPE) -p $(MCU) -b $(PROG_BAUD) -P $(PROG_DEV)
+```
 
-### Adding files to the Makefile
+Adjust `PROG_DEV` to the device your board is connected to. On Linux it's usually `/dev/ttyUSB0`, but it can also be `/dev/ttyACM0` or something else. On Mac, it'll be `/dev/cu.xxx`, on Windows it's some `COMx`.
+
+Linux and Mac users can just `ls /dev` to see what devices they have. Windows users can find this in their Device Manager.
+
+You may also adjust the baudrate (`PROG_BAUD`). Some boards need `115200`.
+
+**TIP:** You can look what the Arduino IDE is using - it's running avrdude too.
+
+### Adding new files
 
 - If you *add a new C file* to the project, add an entry for it's `.o` (object file,
 created by the compiler before linking) to the `OBJS` list in the Makefile.
