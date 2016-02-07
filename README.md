@@ -46,7 +46,7 @@ You may also adjust the baudrate (`-b 57600`). Some boards need 115200 or a diff
 
 You can look what the Arduino IDE is using - it's running avrdude too.
 
-### adjusting the Makefile
+### Adding files to the Makefile
 
 - If you *add a new C file* to the project, add an entry for it's `.o` (object file,
 created by the compiler before linking) to the `OBJS` list in the Makefile.
