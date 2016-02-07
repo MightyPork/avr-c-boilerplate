@@ -11,7 +11,9 @@ DEFINES += __AVR_ATmega328P__ F_CPU=16000000UL
 
 DISTFILES += \
 	style.astylerc \
-	Makefile
+	Makefile \
+    README.md \
+    LICENSE
 
 HEADERS += \
 	lib/calc.h \
@@ -20,7 +22,8 @@ HEADERS += \
 
 SOURCES += \
 	lib/iopins.c \
-	main.c
+	main.c \
+    lib/usart.c
 
 # === Flags for the Clang code model===
 #

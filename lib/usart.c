@@ -66,7 +66,7 @@ void usart_puts_P(const char* str)
 
 
 /** Clear receive buffer */
-void usart_clear_rx()
+void usart_clear_rx(void)
 {
 	uint8_t dummy;
 	while (bit_is_high(UCSR0A, RXC0))
