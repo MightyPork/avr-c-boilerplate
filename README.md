@@ -33,9 +33,12 @@ If you're on Mac, you should be able to pull the stuff with *brew*.
 
 ## Getting started
 
-The provided main.c is a good starting point - it contains some simple demo code.
+The provided `main.c` is a good starting point - it contains some simple demo code.
 
 You can compile it with `make` and flash with `make flash`.
+
+**Before you can flash,** check that the `avrdude` options in the file correct for your system - especially
+the device (`/dev/ttyUSB0`). It can differ if you're on Mac or Windows (`/dev/cu.xxx`, resp. `COMx`).
 
 If you *add a new C file* to the project, add an entry for it's `.o` (object file,
 created by the compiler before linking) to the `OBJS` list in the Makefile.
