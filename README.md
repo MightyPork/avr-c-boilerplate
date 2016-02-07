@@ -39,8 +39,8 @@ You can compile it with `make` and flash with `make flash`.
 
 ### "It doesn't work"
 
-**Before you can flash,** check that the `avrdude` options in the file are correct for your system
-- especially the device (`/dev/ttyUSB0`). It can differ if you're on Mac or Windows (`/dev/cu.xxx`, resp. `COMx`).
+**Before you can flash,** check that the `avrdude` options in the file are correct for your system - especially 
+the device (`/dev/ttyUSB0`). It can differ if you're on Mac or Windows (`/dev/cu.xxx`, resp. `COMx`).
 
 You may also adjust the baudrate (`-b 57600`). Some boards need 115200 or a different value.
 
