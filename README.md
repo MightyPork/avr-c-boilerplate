@@ -37,8 +37,12 @@ The provided `main.c` is a good starting point - it contains some simple demo co
 
 You can compile it with `make` and flash with `make flash`.
 
-**Before you can flash,** check that the `avrdude` options in the file correct for your system - especially
-the device (`/dev/ttyUSB0`). It can differ if you're on Mac or Windows (`/dev/cu.xxx`, resp. `COMx`).
+### adjusting the Makefile
+
+**Before you can flash,** check that the `avrdude` options in the file are correct for your system
+- especially the device (`/dev/ttyUSB0`). It can differ if you're on Mac or Windows (`/dev/cu.xxx`, resp. `COMx`).
+
+You can look what the Arduino IDE is using - it's running avrdude internally as well.
 
 If you *add a new C file* to the project, add an entry for it's `.o` (object file,
 created by the compiler before linking) to the `OBJS` list in the Makefile.
