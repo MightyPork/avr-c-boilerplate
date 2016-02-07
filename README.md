@@ -37,17 +37,19 @@ The provided `main.c` is a good starting point - it contains some simple demo co
 
 You can compile it with `make` and flash with `make flash`.
 
-### adjusting the Makefile
+### "It doesn't work"
 
 **Before you can flash,** check that the `avrdude` options in the file are correct for your system
 - especially the device (`/dev/ttyUSB0`). It can differ if you're on Mac or Windows (`/dev/cu.xxx`, resp. `COMx`).
 
-You can look what the Arduino IDE is using - it's running avrdude internally as well.
+You may also adjust the baudrate (`-b 57600`). Some boards need 115200 or a different value.
 
-If you *add a new C file* to the project, add an entry for it's `.o` (object file,
+You can look what the Arduino IDE is using - it's running avrdude too.
+
+### adjusting the Makefile
+
+- If you *add a new C file* to the project, add an entry for it's `.o` (object file,
 created by the compiler before linking) to the `OBJS` list in the Makefile.
-
-Similarly, if you *add a new folder with header files*, add it to `INCL_DIRS`.
-
-In case you need `printf` (or `printf` with floats), enable the appropriate LD_FLAGS in the Makefile (it's well
+- Similarly, if you *add a new folder with header files*, add it to `INCL_DIRS`.
+- In case you need `printf` (or `printf` with floats), enable the appropriate LD_FLAGS in the Makefile (it's well
 commented). Code size will - obviously - grow quite a bit.
