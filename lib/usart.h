@@ -33,10 +33,6 @@ enum {
 /** Init UART with a UBRR value */
 void usart_init(uint16_t ubrr);
 
-// this is an alternative method of init:
-/** Init UART for given baudrate (works only for low values like 9600) */
-#define usart_init_baud(baud) usart_init(F_CPU / 16 / (baud) - 1)
-
 /** Check if there's a byte in the RX register */
 #define usart_rx_ready() (0 != (UCSR0A & (1 << RXC0)))
 
