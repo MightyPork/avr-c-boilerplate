@@ -27,7 +27,7 @@ ISR(USART_RX_vect)
 void main()
 {
 	usart_init(BAUD_9600);
-	usart_rx_isr_enable(true); // enable RX interrupt handler
+	usart_isr_rx_enable(true); // enable RX interrupt handler
 
 	// configure pins
 	as_output(LED);

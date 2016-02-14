@@ -28,6 +28,7 @@ BINARY = main
 OBJS  = $(BINARY).o
 OBJS += lib/usart.o
 OBJS += lib/iopins.o
+OBJS += lib/spi.o
 
 # Dirs with header files
 INCL_DIRS = . lib/

@@ -18,12 +18,15 @@ DISTFILES += \
 HEADERS += \
 	lib/calc.h \
 	lib/iopins.h \
-	lib/usart.h
+	lib/usart.h \
+    lib/nsdelay.h \
+    lib/spi.h
 
 SOURCES += \
 	lib/iopins.c \
 	main.c \
-    lib/usart.c
+    lib/usart.c \
+    lib/spi.c
 
 # === Flags for the Clang code model===
 #

@@ -32,28 +32,28 @@ enum {
 	BAUD_1M = 0,
 };
 
-/** Init UART with a UBRR value */
+/** Init UART with a UBRR value - can use the BAUD_* constants for 16 MHz */
 void usart_init(uint16_t ubrr);
 
 /** Check if there's a byte in the RX register */
-#define usart_rx_ready() (0 != (UCSR0A & (1 << RXC0)))
+#define usart_rx_ready() bit_is_high(UCSR0A, RXC0)
 
-/** Check if transmission of everything is done */
-#define usart_tx_ready() (0 != (UCSR0A & (1 << UDRE0)))
+/** Check if USART is ready to accept new byte to send */
+#define usart_tx_ready() bit_is_low(UCSR0A, UDRE0)
 
 
 // ---- Enable UART interrupts ------------
 
 /** Enable or disable RX ISR */
-#define usart_rx_isr_enable(yes) set_bit(UCSR0B, RXCIE0, (yes))
+#define usart_isr_rx_enable(yes) set_bit(UCSR0B, RXCIE0, (yes))
 
 
-/** Enable or disable TX ISR (1 byte is sent) */
-#define usart_tx_isr_enable(yes) set_bit(UCSR0B, TXCIE0, (yes))
+/** Enable or disable TX ISR (all data sent) */
+#define usart_isr_tx_enable(yes) set_bit(UCSR0B, TXCIE0, (yes))
 
 
-/** Enable or disable DRE ISR (all is sent) */
-#define usart_dre_isr_enable(yes) set_bit(UCSR0B, UDRIE0, (yes))
+/** Enable or disable DRE ISR (data register empty) */
+#define usart_isr_dre_enable(yes) set_bit(UCSR0B, UDRIE0, (yes))
 
 
 // ---- Basic IO --------------------------
@@ -66,12 +66,8 @@ void usart_tx(uint8_t data);
 uint8_t usart_rx(void);
 
 
-/** Send byte over UART */
-#define usart_putc(data) usart_tx((data))
-
-
 /** Clear receive buffer */
-void usart_clear_rx(void);
+void usart_flush_rx(void);
 
 
 // ---- Strings ---------------------------
@@ -80,5 +76,5 @@ void usart_clear_rx(void);
 void usart_puts(const char* str);
 
 
-/** Send progmem string over UART */
+/** Send progmem string `PSTR("foobar")` over UART  */
 void usart_puts_P(const char* str);
