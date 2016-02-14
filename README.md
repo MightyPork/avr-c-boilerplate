@@ -52,8 +52,11 @@ PROG_TYPE = arduino
 PROG_ARGS = -c $(PROG_TYPE) -p $(MCU) -b $(PROG_BAUD) -P $(PROG_DEV)
 ```
 
-- Adjust `PROG_DEV` to the device your board is connected to. On Linux it's usually `/dev/ttyUSB0`, but it can also be `/dev/ttyACM0` or something else. On Mac, it'll be `/dev/cu.xxx`. On Windows it's some `COMx`.<br>
-  Linux and Mac users can use `ls /dev` to see their devices. Windows users will find this in their Device Manager.
+- Adjust `PROG_DEV` to the device your board is connected to. On Linux it's usually 
+  `/dev/ttyUSB0`, but it can also be `/dev/ttyACM0` or something else. On Mac, it'll be
+  `/dev/cu.xxx`. On Windows it's some `COMx`.<br>
+  Linux and Mac users can use `ls /dev` to see their devices. Windows users will find
+  this in their Device Manager.
 - You may also adjust the baudrate (`PROG_BAUD`). Some boards need `115200`.
 
 **TIP:** You can look what the Arduino IDE is using - it's running avrdude too.
@@ -63,5 +66,5 @@ PROG_ARGS = -c $(PROG_TYPE) -p $(MCU) -b $(PROG_BAUD) -P $(PROG_DEV)
 - If you *add a new C file* to the project, add an entry for it's `.o` (object file,
 created by the compiler before linking) to the `OBJS` list in the Makefile.
 - Similarly, if you *add a new folder with header files*, add it to `INCL_DIRS`.
-- In case you need `printf` (or `printf` with floats), enable the appropriate LD_FLAGS in the Makefile (it's well
-commented). Code size will - obviously - grow quite a bit.
+- In case you need `printf` (or `printf` with floats), enable the appropriate LD_FLAGS
+  in the Makefile (it's well commented). Code size will - obviously - grow quite a bit.
