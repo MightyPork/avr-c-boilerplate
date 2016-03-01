@@ -71,5 +71,4 @@ created by the compiler before linking) to the `OBJS` list in the Makefile.
 
 ## Notes
 
-### USART
-Note that if you are using an **Arduino Uno**, USART work a little different; If you set the baudrate to `57600` for example, the baudrate you'll have to listen for in your terminal will become double the rate you've set in the code, so that's `115200`. This is because the Uno runs on `Asynchronous Double Speed Mode` by default. 
+- Since the Arduino Uno has a quirk where Double Speed Asynchronous Mode for USART is enabled by default, we made sure to disable this. If this mode is enabled it means that the USART baud rate is doubled, so if you were using a baud rate of `9200` in the code, you'd have to use a baud rate of 19200 in your terminal. We disabled this to keep things consistent, and because it has no real benefit. If you wish to turn this on however, you can do so by using `usart_set_2x(true);`

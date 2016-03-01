@@ -19,10 +19,22 @@ void usart_init(uint16_t ubrr)
 	// Enable Rx and Tx
 	UCSR0B = (1 << RXEN0) | (1 << TXEN0);
 
+	// Clear U2X0
+	cbi(UCSR0A, U2X0);
+
 	// 8-bit data, 1 stop bit
 	UCSR0C = (0b11 << UCSZ00);
 }
 
+void usart_set_2x(bool set) 
+{
+	// Turn on Double Speed Asynchronous Mode
+	if (set)
+		sbi(UCSR0A, U2X0);
+	// Turn off Double Speed Asynchronous Mode
+	else
+		cbi(UCSR0A, U2X0);
+}
 
 /** Send byte over USART */
 void usart_tx(uint8_t data)
