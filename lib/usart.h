@@ -39,7 +39,7 @@ void usart_init(uint16_t ubrr);
 #define usart_rx_ready() bit_is_high(UCSR0A, RXC0)
 
 /** Check if USART is ready to accept new byte to send */
-#define usart_tx_ready() bit_is_low(UCSR0A, UDRE0)
+#define usart_tx_ready() bit_is_high(UCSR0A, UDRE0)
 
 
 // ---- Enable UART interrupts ------------
