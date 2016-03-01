@@ -68,3 +68,8 @@ created by the compiler before linking) to the `OBJS` list in the Makefile.
 - Similarly, if you *add a new folder with header files*, add it to `INCL_DIRS`.
 - In case you need `printf` (or `printf` with floats), enable the appropriate LD_FLAGS
   in the Makefile (it's well commented). Code size will - obviously - grow quite a bit.
+
+## Notes
+
+### USART
+Note that if you are using an **Arduino Uno**, USART work a little different; If you set the baudrate to `57600` for example, the baudrate you'll have to listen for in your terminal will become double the rate you've set in the code, so that's `115200`. This is because the Uno runs on `Asynchronous Double Speed Mode` by default. 
