@@ -39,7 +39,7 @@ You can compile it with `make` and flash with `make flash`.
 
 ### Before you can flash
 
-First, check that the `avrdude` options in the file are correct for your system - especially 
+First, check that the `avrdude` options in the file are correct for your system - especially
 the device and speed.
 
 ```ini
@@ -52,7 +52,7 @@ PROG_TYPE = arduino
 PROG_ARGS = -c $(PROG_TYPE) -p $(MCU) -b $(PROG_BAUD) -P $(PROG_DEV)
 ```
 
-- Adjust `PROG_DEV` to the device your board is connected to. On Linux it's usually 
+- Adjust `PROG_DEV` to the device your board is connected to. On Linux it's usually
   `/dev/ttyUSB0`, but it can also be `/dev/ttyACM0` or something else. On Mac, it'll be
   `/dev/cu.xxx`. On Windows it's some `COMx`.<br>
   Linux and Mac users can use `ls /dev` to see their devices. Windows users will find
@@ -71,4 +71,8 @@ created by the compiler before linking) to the `OBJS` list in the Makefile.
 
 ## Notes
 
-- Since the Arduino Uno has a quirk where Double Speed Asynchronous Mode for USART is enabled by default, we made sure to disable this. If this mode is enabled it means that the USART baud rate is doubled, so if you were using a baud rate of `9200` in the code, you'd have to use a baud rate of 19200 in your terminal. We disabled this to keep things consistent, and because it has no real benefit. If you wish to turn this on however, you can do so by using `usart_set_2x(true);`
+- The **Arduino UNO** bootloader has a quirk where `Double Speed Asynchronous Mode` for USART
+  is enabled by default, so if you set your baud rate to 9600, you'd really get 19200.<br>
+  We correct this in the `usart_init()` function to keep things consistent and to avoid
+  confusion.<br>
+  *If you wish to turn this on* however, you can do so by using `usart_set_2x(true)`.

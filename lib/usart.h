@@ -35,11 +35,14 @@ enum {
 /** Init UART with a UBRR value - can use the BAUD_* constants for 16 MHz */
 void usart_init(uint16_t ubrr);
 
+
 /** Set Double Speed Asynchronous mode on or off */
 void usart_set_2x(bool set);
 
+
 /** Check if there's a byte in the RX register */
 #define usart_rx_ready() bit_is_high(UCSR0A, RXC0)
+
 
 /** Check if USART is ready to accept new byte to send */
 #define usart_tx_ready() bit_is_high(UCSR0A, UDRE0)

@@ -26,15 +26,13 @@ void usart_init(uint16_t ubrr)
 	UCSR0C = (0b11 << UCSZ00);
 }
 
-void usart_set_2x(bool set) 
+
+/** Set Double Speed Asynchronous mode */
+void usart_set_2x(bool set)
 {
-	// Turn on Double Speed Asynchronous Mode
-	if (set)
-		sbi(UCSR0A, U2X0);
-	// Turn off Double Speed Asynchronous Mode
-	else
-		cbi(UCSR0A, U2X0);
+	set_bit(UCSR0A, U2X0, set);
 }
+
 
 /** Send byte over USART */
 void usart_tx(uint8_t data)
@@ -59,8 +57,7 @@ uint8_t usart_rx(void)
 /** Send string over USART */
 void usart_puts(const char* str)
 {
-	while (*str)
-	{
+	while (*str) {
 		usart_tx(*str++);
 	}
 }
@@ -70,8 +67,7 @@ void usart_puts(const char* str)
 void usart_puts_P(const char* str)
 {
 	char c;
-	while ((c = pgm_read_byte(str++)))
-	{
+	while ((c = pgm_read_byte(str++))) {
 		usart_tx(c);
 	}
 }
@@ -81,8 +77,7 @@ void usart_puts_P(const char* str)
 void usart_flush_rx(void)
 {
 	uint8_t dummy;
-	while (bit_is_high(UCSR0A, RXC0))
-	{
+	while (bit_is_high(UCSR0A, RXC0)) {
 		dummy = UDR0;
 	}
 }
