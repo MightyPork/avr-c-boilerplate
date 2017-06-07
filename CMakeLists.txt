@@ -13,6 +13,8 @@ set(SOURCE_FILES
         lib/nsdelay.h
         lib/spi.c
         lib/spi.h
+        lib/adc.c
+        lib/adc.h
         lib/usart.c
         lib/usart.h
         )
