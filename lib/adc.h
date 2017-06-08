@@ -25,8 +25,20 @@ void adc_disable(void);
 /** Enable (already initialized) ADC */
 void adc_enable(void);
 
-/** Sample analog pin with 8-bit precision */
-uint8_t adc_read_byte(uint8_t channel);
+/** Start a new conversion */
+void adc_start_conversion(uint8_t channel);
 
-/** Sample analog pin with 10-bit precision */
-uint16_t adc_read_word(uint8_t channel);
+/** Check if ADC is done converting */
+bool adc_ready(void);
+
+/** Read the result of last conversion with 8bit precision */
+uint8_t adc_read_8bit(void);
+
+/** Read the result of last conversion with 10bit precision */
+uint16_t adc_read_10bit(void);
+
+/** Sample analog pin with 8-bit precision. Blocking! */
+uint8_t adc_convert_8bit(uint8_t channel);
+
+/** Sample analog pin with 10-bit precision. Blocking! */
+uint16_t adc_convert_10bit(uint8_t channel);
